@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,5 +15,9 @@ public class TrainerService {
 
     public List<Trainer> getTrainers() {
         return trainerRepository.findAll();
+    }
+
+    public Optional<Trainer> getTrainerById(Long id) {
+        return trainerRepository.findById(id);
     }
 }
