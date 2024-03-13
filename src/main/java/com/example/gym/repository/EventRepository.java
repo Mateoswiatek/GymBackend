@@ -4,6 +4,16 @@ import com.example.gym.repository.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
+//    @Query("select e from Event e where e.date between :date1 and :date2")
+//    List<Event> findAllByDateBetween(@Param("date1") LocalDateTime date1, @Param("date2") LocalDateTime date2);
+    List<Event> findAllByDateBetween(LocalDateTime from, LocalDateTime to);
+
+    // TODO: 13.03.2024 zrobic bardziej ludzkie wyszukiwanie, bardziej z like ale to nie dziala
+//    @Query("select e from Event e where e.title = ?1")
+    List<Event> findAllByTitle(String title);
 }

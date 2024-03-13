@@ -20,6 +20,7 @@ public class Trainer {
     private String name;
     private String lastname;
     private String phoneNumber;
+    // TODO: 13.03.2024 czy nie lepiej robic Seta ?
     @OneToMany
     private List<Event> events;
 }

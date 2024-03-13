@@ -26,6 +26,11 @@ public class Mocker {
                         .date(LocalDateTime.now())
                     .build());
         }
+        events.add(Event.builder()
+                .title("PrzyszlyEvent")
+                .description("opisPrzyszlosci")
+                .date(LocalDateTime.now().plusDays(10))
+                .build());
         eventRepository.saveAll(events);
     }
 

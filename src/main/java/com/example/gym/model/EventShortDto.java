@@ -15,5 +15,5 @@ public class EventShortDto {
     private Long id;
     private String title;
     private LocalDateTime date;
-    private boolean open; // czy jeszcze sa miejsca na ten event
+//    private boolean open; // czy jeszcze sa miejsca na ten event
 }

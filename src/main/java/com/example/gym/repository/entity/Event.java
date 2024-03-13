@@ -24,3 +24,8 @@ public class Event {
     private String description;
     private LocalDateTime date;
 }
+
+/*
+dodac czy jest max ilosc miejsc, jesli nie podano to null?
+dodac mozliwosc zapisu na event, userzy moga sie zapisywac na event
+ */

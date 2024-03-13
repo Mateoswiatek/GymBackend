@@ -4,6 +4,12 @@ tutaj tranzakcyjnosc / wzajemne wykluczanie, przy zapisywaniu na kurs?
 przy userach ma być /your-events/?pe=1
 i coś w stylu stare / przyszłe.
 
+todo pozamieniać Entity na obiekty DTO
+todo doac obudowanie ResponseEntity, jak wyklad byl
+todo Ilosc osob na silowni, zrobic w userze, po prostu zwracamy count(*) where zalogowany = true czy jakos tak.
 
+todo wgl dodac userow, dodac tez ich staty
 
+post = trainer
+comment = events
 
