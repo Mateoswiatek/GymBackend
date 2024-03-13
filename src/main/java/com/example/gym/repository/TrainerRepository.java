@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     @Query("select t from Trainer t " +
-            "left join fetch t.events")
+            "left join fetch t.events") // co dociagamy
     List<Trainer> findAllTrainers();
 }

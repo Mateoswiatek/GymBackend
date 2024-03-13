@@ -14,7 +14,7 @@ public class TrainerService {
     private final TrainerRepository trainerRepository;
 
     public List<Trainer> getTrainers() {
-        return trainerRepository.findAllTrainers();
+        return trainerRepository.findAllTrainers(); // zmiana
     }
 
     public Optional<Trainer> getTrainerById(Long id) {
