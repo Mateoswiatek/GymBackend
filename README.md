@@ -17,6 +17,15 @@ Użycie count zamiast find przy tworzeniu statystyki "inGym"
 
 ![image](https://github.com/Mateoswiatek/GymBackend/assets/115046087/8f120c51-d2c5-4a91-89f2-60e108b5dcb4)
 
+![Screenshot from 2024-03-13 20-45-23](https://github.com/Mateoswiatek/GymBackend/assets/115046087/9f6d2e8c-b098-426e-b792-25ab2e1346ba)
+
+
+
+![Screenshot from 2024-03-13 21-02-39](https://github.com/Mateoswiatek/GymBackend/assets/115046087/0b466805-3428-4c02-ba32-8507b25eac4f)
+
 Rekurencyjny problem:
 ![image](https://github.com/Mateoswiatek/GymBackend/assets/115046087/c875d0df-5099-4dbc-80ea-c9ec1348cede)
+
+
+
 
