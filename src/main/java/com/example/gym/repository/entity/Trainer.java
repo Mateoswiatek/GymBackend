@@ -22,5 +22,6 @@ public class Trainer {
     private String phoneNumber;
     // TODO: 13.03.2024 czy nie lepiej robic Seta ?
     @OneToMany
+//    @JoinColumn(name = "trainer_id") ???
     private List<Event> events;
 }

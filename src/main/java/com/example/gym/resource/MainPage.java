@@ -1,9 +1,7 @@
 package com.example.gym.resource;
 
-import com.example.gym.model.EventShortDto;
-import com.example.gym.repository.EventRepository;
+import com.example.gym.dto.EventShortDto;
 import com.example.gym.repository.Mocker;
-import com.example.gym.repository.entity.Event;
 import com.example.gym.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

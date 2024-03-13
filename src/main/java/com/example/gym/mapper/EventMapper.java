@@ -1,10 +1,11 @@
 package com.example.gym.mapper;
 
-import com.example.gym.model.EventDto;
-import com.example.gym.model.EventShortDto;
+import com.example.gym.dto.EventDto;
+import com.example.gym.dto.EventShortDto;
 import com.example.gym.repository.entity.Event;
 
 public class EventMapper {
+    private EventMapper() {}
 
     public static Event toEvent(EventShortDto eventShortDto){
         throw new IllegalArgumentException("Nie zaimplementowano");

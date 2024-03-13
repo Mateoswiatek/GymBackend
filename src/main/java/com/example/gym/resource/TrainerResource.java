@@ -1,5 +1,7 @@
 package com.example.gym.resource;
 
+import com.example.gym.mapper.TrainerMapper;
+import com.example.gym.dto.TrainerDto;
 import com.example.gym.repository.entity.Trainer;
 import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,8 @@ public class TrainerResource {
 
     // TODO: 13.03.2024 tutaj bedziemy zwracac mniej szczegulowe informacje na temat trenerow, bedzie TrainerShortDto
     @GetMapping("")
-    public List<Trainer> getTrainers() {
-        return  trainerService.getTrainers();
+    public List<TrainerDto> getTrainers() {
+        return  trainerService.getTrainers().stream().map(TrainerMapper::toDto).toList();
     }
 
     // TODO: 13.03.2024 dodac opcje szukania po nazwie?
