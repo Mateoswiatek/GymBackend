@@ -21,4 +21,6 @@ public class TrainerService {
     public Optional<Trainer> getTrainerById(Long id) {
         return trainerRepository.findById(id);
     }
+
+    public Long getCountTrainerInGym() { return trainerRepository.countAllByInGymIsTrue();}
 }

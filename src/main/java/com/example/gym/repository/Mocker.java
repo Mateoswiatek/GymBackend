@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,12 +33,14 @@ public class Mocker {
 
     public void mockTrainers() {
         List<Trainer> trainers = new ArrayList<>(10);
+        Random random = new Random();
         for (long i = 1; i <= 10; i++) {
 
             trainers.add(Trainer.builder()
                             .name("Nazwa" + i)
                             .lastname("Nazwisko" + i)
                             .phoneNumber(String.valueOf(i))
+                            .inGym(random.nextBoolean())
                             .events(eventRepository.findAllById(List.of(i, 21-i)))
                     .build());
         }

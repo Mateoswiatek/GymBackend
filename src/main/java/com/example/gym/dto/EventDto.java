@@ -1,5 +1,7 @@
 package com.example.gym.dto;
 
+import com.example.gym.repository.entity.Trainer;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

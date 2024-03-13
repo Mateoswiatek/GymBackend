@@ -1,8 +1,10 @@
 package com.example.gym.resource;
 
 import com.example.gym.dto.EventShortDto;
+import com.example.gym.dto.StatsInGymResponse;
 import com.example.gym.repository.Mocker;
 import com.example.gym.service.EventService;
+import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +18,19 @@ import java.util.List;
 public class MainPage {
     private final Mocker mocker;
     private final EventService eventService;
+    private final TrainerService trainerService;
     @GetMapping("/mock")
     public ResponseEntity<String> mock() {
         mocker.mockEvents();
         mocker.mockTrainers();
         return ResponseEntity.ok("zamokowalismy baze danych");
+    }
+
+    @GetMapping("/ingym")
+    public ResponseEntity<StatsInGymResponse> inGym() {
+        Long userCount = 0L;
+        Long trainerCount = trainerService.getCountTrainerInGym();
+        return ResponseEntity.ok(new StatsInGymResponse(userCount, trainerCount));
     }
 
     @GetMapping("/find/") // find/?keywords=

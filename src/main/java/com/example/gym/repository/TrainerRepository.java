@@ -12,4 +12,6 @@ import java.util.List;
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     @Query("select t from Trainer t") // co dociagamy
     List<Trainer> findAllTrainers(Pageable page);
+
+    Long countAllByInGymIsTrue();
 }

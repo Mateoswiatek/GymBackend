@@ -4,6 +4,8 @@ import com.example.gym.dto.EventDto;
 import com.example.gym.dto.EventShortDto;
 import com.example.gym.repository.entity.Event;
 
+import java.util.List;
+
 public class EventMapper {
     private EventMapper() {}
 
@@ -17,6 +19,9 @@ public class EventMapper {
                 .date(event.getDate())
                 .build();
     }
+    public static List<EventShortDto> toShortDtoList(List<Event> eventList) {
+        return eventList.stream().map(EventMapper::toShortDto).toList();
+    }
     public static EventDto toDto(Event event) {
         return EventDto.builder()
                 .id(event.getId())
@@ -24,6 +29,9 @@ public class EventMapper {
                 .description(event.getDescription())
                 .date(event.getDate())
                 .build();
+    }
+    public static List<EventDto> toDtoList(List<Event> eventList) {
+        return eventList.stream().map(EventMapper::toDto).toList();
     }
 
 }

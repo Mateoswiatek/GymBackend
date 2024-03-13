@@ -8,7 +8,11 @@ todo pozamieniać Entity na obiekty DTO
 todo doac obudowanie ResponseEntity, jak wyklad byl
 todo Ilosc osob na silowni, zrobic w userze, po prostu zwracamy count(*) where zalogowany = true czy jakos tak.
 
+todo dodac wszedzie stronicowanie przy wiekszych zapytaniach
+
 todo wgl dodac userow, dodac tez ich staty
+
+todo czy nie lepiej byłoby zamiast list, zwracać page? skoro i tak leci jako strona? w tedy nie trzeba mapować bez sensu co chwile z listy na page i na odwrót
 
 post = trainer
 comment = events

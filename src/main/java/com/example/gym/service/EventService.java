@@ -13,10 +13,14 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     public List<EventShortDto> getShortEvents() {
-        return eventRepository.findAll(PageRequest.of(0, 5)).stream().map(EventMapper::toShortDto).toList();
+        return EventMapper.toShortDtoList(eventRepository.findAll(PageRequest.of(0, 5)).toList());
     }
 
     public List<EventShortDto> getShortEventsByTitle(String title){
-        return eventRepository.findAllByTitle(title).stream().map(EventMapper::toShortDto).toList();
+        return EventMapper.toShortDtoList(eventRepository.findAllByTitle(title));
+    }
+
+    public List<EventShortDto> getShortEventsByTrainerId(Long id) {
+        return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id));
     }
 }
