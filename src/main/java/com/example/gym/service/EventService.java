@@ -17,6 +17,6 @@ public class EventService {
     }
 
     public List<EventShortDto> getShortEventsByTitle(String title){
-        return eventRepository.findAllByTitleIsLike(title).stream().map(EventMapper::toShortDto).toList();
+        return eventRepository.findAllByTitle(title).stream().map(EventMapper::toShortDto).toList();
     }
 }
