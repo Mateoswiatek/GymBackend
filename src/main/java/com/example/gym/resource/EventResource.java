@@ -16,7 +16,7 @@ public class EventResource {
     private final EventService eventService;
 
     // TODO: 12.03.2024 zmodyfikowanie stronnicowania
-    @GetMapping("/") // ?page=2
+    @GetMapping("") // ?page=2
     public List<EventShortDto> getAll(@RequestParam(defaultValue = "1") int page) { // ResponseEntity<EventShortResponse>
         return eventService.getShortEvents();
 //        eventService.getAll();

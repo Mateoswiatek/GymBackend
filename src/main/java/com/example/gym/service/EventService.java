@@ -5,6 +5,7 @@ import com.example.gym.model.EventShortDto;
 import com.example.gym.repository.EventRepository;
 import com.example.gym.repository.entity.Event;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     public List<EventShortDto> getShortEvents() {
-        return eventRepository.findAll().stream().map(EventMapper::toShortDto).toList();
+        return eventRepository.findAll(PageRequest.of(0, 5)).stream().map(EventMapper::toShortDto).toList();
     }
 
     public List<EventShortDto> getShortEventsByTitle(String title){
