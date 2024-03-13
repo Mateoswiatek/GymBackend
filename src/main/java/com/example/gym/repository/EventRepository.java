@@ -1,7 +1,9 @@
 package com.example.gym.repository;
 
+import com.example.gym.repository.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
-/*
-public interface EventRepository extends JpaRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EventRepository extends JpaRepository<Event, Long> {
 }
-*/

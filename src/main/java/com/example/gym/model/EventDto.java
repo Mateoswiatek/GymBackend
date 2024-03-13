@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventShortDto {
+public class EventDto {
     private Long id;
     private String title;
+    private String description;
     private LocalDateTime date;
-    private boolean open; // czy jeszcze sa miejsca na ten event
+    // liczba miejsc, wolnych i zajetych, nazwa organizatora, id organizatora - aby mozna bylo przejsc do jego strony
 }
