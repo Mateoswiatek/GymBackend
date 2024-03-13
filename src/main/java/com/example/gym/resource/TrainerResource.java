@@ -9,10 +9,7 @@ import com.example.gym.service.EventService;
 import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +23,11 @@ public class TrainerResource {
     // TODO: 13.03.2024 zrobić wiecej detalis na temat trenera, w tedy one beda sie wyswietly na jego tablicy. tak aby bylo zroznicowane TrainerShortDto, TrainerDto
 
     // TODO: 13.03.2024 tutaj bedziemy zwracac mniej szczegulowe informacje na temat trenerow, bedzie TrainerShortDto
-    @GetMapping("")
-    public List<TrainerShortDto> getTrainers() {
-        return  trainerService.getTrainers().stream().map(TrainerMapper::toShortDto).toList();
+    @GetMapping("/") // trainer/?page=0&size=5
+    public List<TrainerShortDto> getTrainers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        int pageNumber = page > 0 ? page : 1;
+        int sizeValue = size > 0 ? size : 10;
+        return  trainerService.getTrainers(pageNumber-1, sizeValue).stream().map(TrainerMapper::toShortDto).toList();
     }
 
     // TODO: 13.03.2024 dodac opcje szukania po nazwie?
@@ -49,7 +48,7 @@ public class TrainerResource {
         return trainer.map(value -> ResponseEntity.ok(TrainerMapper.toDto(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // TODO: 13.03.2024 co jeśli nie ma takiego trenera?
+    // TODO: 13.03.2024 moze da sie jakos ladniej podpiac czesc z eventami do tego?
     @GetMapping("/{id}/events")
     public ResponseEntity<EventShortResponse> getEventsByTrainerId(@PathVariable Long id) {
         /*
@@ -68,5 +67,11 @@ public class TrainerResource {
 
 //        A tu bez sprawdzania czy istnieje taki Trener
 //        return ResponseEntity.ok(new EventShortResponse(eventService.getShortEventsByTrainerId(id)));
+    }
+
+    // TODO: 13.03.2024 czy takie api ma sens, tutaj przekazujemy rzeczy i odpalamy metode z EventService?
+    @PostMapping("/{id}/events/adding")
+    public ResponseEntity<Object> addEvent(){
+        throw new IllegalArgumentException("Nie zaimplementowano jeszcze");
     }
 }

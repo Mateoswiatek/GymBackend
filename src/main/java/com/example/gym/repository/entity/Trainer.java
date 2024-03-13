@@ -24,6 +24,6 @@ public class Trainer {
     private boolean inGym;
     // TODO: 13.03.2024 czy nie lepiej robic Seta ?
     @OneToMany
-    @JoinColumn(name = "TRAINER_ID") // musi byc, w tedy do Eventu dodawany jest klucz obcy tego trenera.
+    @JoinColumn(name = "TRAINER_ID") // musi byc, w tedy do Eventu dodawany jest klucz obcy tego trenera. w innym wypadku tworzona jest nowa tabela, w zaleznosci od krotnosci obiektow
     private List<Event> events;
 }

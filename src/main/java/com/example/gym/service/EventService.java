@@ -12,8 +12,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
-    public List<EventShortDto> getShortEvents() {
-        return EventMapper.toShortDtoList(eventRepository.findAll(PageRequest.of(0, 5)).toList());
+    public List<EventShortDto> getShortEvents(int page, int size) {
+        return EventMapper.toShortDtoList(eventRepository.findAll(PageRequest.of(page, size)).toList());
     }
 
     public List<EventShortDto> getShortEventsByTitle(String title){

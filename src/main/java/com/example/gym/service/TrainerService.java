@@ -14,8 +14,8 @@ import java.util.Optional;
 public class TrainerService {
     private final TrainerRepository trainerRepository;
 
-    public List<Trainer> getTrainers() {
-        return trainerRepository.findAllTrainers(PageRequest.of(0, 3)); // zmiana
+    public List<Trainer> getTrainers(int page, int size) {
+        return trainerRepository.findAllTrainers(PageRequest.of(page, size)); // zmiana
     }
 
     public Optional<Trainer> getTrainerById(Long id) {

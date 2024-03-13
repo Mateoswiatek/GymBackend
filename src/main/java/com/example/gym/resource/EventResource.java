@@ -17,9 +17,10 @@ public class EventResource {
 
     // TODO: 12.03.2024 zmodyfikowanie stronnicowania
     @GetMapping("") // ?page=2
-    public List<EventShortDto> getAll(@RequestParam(defaultValue = "1") int page) { // ResponseEntity<EventShortResponse>
-        return eventService.getShortEvents();
-//        eventService.getAll();
+    public List<EventShortDto> getAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) { // ResponseEntity<EventShortResponse>
+        int pageNumber = page > 0 ? page : 1;
+        int sizeValue = size > 0 ? size : 10;
+        return eventService.getShortEvents(pageNumber, sizeValue);
 //        return ResponseEntity.ok(new EventShortResponse(eventShortDtoList));
     }
 
@@ -27,10 +28,4 @@ public class EventResource {
     public EventDto getEvent(@RequestParam int id) { // ResponseEntity<EventResponse>
         throw new IllegalArgumentException("Nie zaimplementowano jeszcze");
     }
-
-    @PostMapping("/adding")
-    public ResponseEntity<Object> addEvent(){
-        throw new IllegalArgumentException("Nie zaimplementowano jeszcze");
-    }
-
 }

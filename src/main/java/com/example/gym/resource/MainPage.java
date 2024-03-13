@@ -6,8 +6,10 @@ import com.example.gym.repository.Mocker;
 import com.example.gym.service.EventService;
 import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,7 @@ public class MainPage {
         return ResponseEntity.ok("zamokowalismy baze danych");
     }
 
+    // TODO: 13.03.2024 Dorobic usera
     @GetMapping("/ingym")
     public ResponseEntity<StatsInGymResponse> inGym() {
         Long userCount = 0L;
@@ -33,9 +36,16 @@ public class MainPage {
         return ResponseEntity.ok(new StatsInGymResponse(userCount, trainerCount));
     }
 
+    // TODO: 13.03.2024 dorobic filtrowanie jakies ciekawsze ogarnac z filtrowaniem?
     @GetMapping("/find/") // find/?keywords=
-    public List<EventShortDto> find(@RequestParam(defaultValue = "") String keywords) {
-        return keywords.isEmpty() ? eventService.getShortEvents() : eventService.getShortEventsByTitle(keywords);
+    public List<EventShortDto> find(@RequestParam(defaultValue = "") String keywords, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size){
+        return keywords.isEmpty() ? eventService.getShortEvents(page, size) : eventService.getShortEventsByTitle(keywords);
+    }
+
+    // TODO: 13.03.2024 dodac funkcjonalnosc zglaszania bledow, kategoria, tytul, tekst, date, maila do osoby zglaszajacej ewentualnie miejsce na przeslanie zdjecia? 
+    @PostMapping(value = "/report", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> reportProblem() {
+        throw new IllegalArgumentException("not yet implemented!");
     }
 
 }
