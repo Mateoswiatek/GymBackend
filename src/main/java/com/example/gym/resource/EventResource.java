@@ -1,16 +1,12 @@
 package com.example.gym.resource;
 
 import com.example.gym.model.EventDto;
-import com.example.gym.model.EventResponse;
 import com.example.gym.model.EventShortDto;
-import com.example.gym.model.EventShortResponse;
-import com.example.gym.repository.Mocker;
 import com.example.gym.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,12 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventResource {
     private final EventService eventService;
-    private final Mocker mocker;
-    @GetMapping("/mock")
-    public ResponseEntity<String> mock() {
-        mocker.mockEvents();
-        return ResponseEntity.ok("zamokowalismy baze danych");
-    }
 
     // TODO: 12.03.2024 zmodyfikowanie stronnicowania
     @GetMapping("/") // ?page=2
