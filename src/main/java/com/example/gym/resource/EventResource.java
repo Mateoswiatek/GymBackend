@@ -34,9 +34,11 @@ public class EventResource {
         return eventService.getEventDtoById(id);
     }
 
-    @GetMapping("/{id}/participants")
-    public List<UserShortDto> getEventParticipants(@PathVariable Long id) {
-        return eventService.getEventParticipants(id);
+    @GetMapping("/{id}/participants/") ///?page=1&size=5
+    public List<UserShortDto> getEventParticipants(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @PathVariable Long id) {
+        int pageNumber = page > 0 ? page : 1;
+        int sizeValue = size > 0 ? size : 10;
+        return eventService.getEventParticipants(id, pageNumber-1, sizeValue);
     }
 
 

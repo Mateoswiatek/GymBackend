@@ -5,6 +5,7 @@ import com.example.gym.repository.entity.Event;
 import com.example.gym.repository.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,6 +35,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Long> findAllEventIds(Pageable pageable);
 
     @Query("select e.participants from Event e where e.id = :eventId")
-    List<User> findParticipantsByEventId(Long eventId);
+    List<User> findParticipantsByEventId(Long eventId, Pageable pageable);
 
 }

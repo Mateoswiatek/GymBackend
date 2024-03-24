@@ -6,6 +6,7 @@ import com.example.gym.mapper.EventMapper;
 import com.example.gym.dto.EventShortDto;
 import com.example.gym.mapper.UserMapper;
 import com.example.gym.repository.EventRepository;
+import com.example.gym.repository.UserRepository;
 import com.example.gym.repository.entity.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public List<EventShortDto> getShortEvents(int page, int size) {
@@ -46,7 +48,7 @@ public class EventService {
         return EventMapper.toDto(optional.get());
     }
 
-    public List<UserShortDto> getEventParticipants(Long id) {
-        return UserMapper.toShortDtoList(eventRepository.findParticipantsByEventId(id));
+    public List<UserShortDto> getEventParticipants(Long id, int page, int size) {
+        return UserMapper.toShortDtoList(eventRepository.findParticipantsByEventId(id, PageRequest.of(page, size)));
     }
 }
