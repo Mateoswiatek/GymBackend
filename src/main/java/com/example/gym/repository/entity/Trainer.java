@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class Trainer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String lastname;

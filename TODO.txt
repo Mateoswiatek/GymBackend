@@ -22,3 +22,5 @@ todo dodać zmienianie profili trenerów / userów, doczytać jak takie coś rob
 todo doczytać jak się robi logowania.
 
 todo Zrobić swoje wyjątki, jak na wykładzie "były".
+
+todo dodać do eventów poziom zaawansowania, skala 0 do 5.

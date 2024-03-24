@@ -101,6 +101,7 @@ DONE:
         - Resonse
           - participants (List< UserShortDto>)
 
+DONE
 - **/trainers** - lista trenerów 
   - GET
     - Request
