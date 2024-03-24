@@ -16,8 +16,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 //    List<Event> findAllByDateBetween(@Param("date1") LocalDateTime date1, @Param("date2") LocalDateTime date2);
     List<Event> findAllByStartDateBetween(LocalDateTime from, LocalDateTime to);
 
-    // TODO: 13.03.2024 zrobic bardziej ludzkie wyszukiwanie, bardziej z like ale to nie dziala
-//    @Query("select e from Event e where e.title = ?1")
     List<Event> findAllByTitle(String title);
-    Page<Event> findAllByTrainerId(Long id, Pageable pageable);
+    List<Event> findAllByTrainerId(Long id, Pageable pageable);
 }

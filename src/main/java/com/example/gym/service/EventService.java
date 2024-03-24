@@ -24,6 +24,6 @@ public class EventService {
 
     public List<EventShortDto> getShortEventsByTrainerId(Long id, int page, int size) {
         //
-        return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id, PageRequest.of(page, size)).getContent());
+        return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id, PageRequest.of(page, size)));
     }
 }

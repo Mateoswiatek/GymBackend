@@ -40,7 +40,6 @@ public class TrainerResource {
         return trainer.map(value -> ResponseEntity.ok(TrainerMapper.toDto(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // TODO: 13.03.2024 moze da sie jakos ladniej podpiac czesc z eventami do tego?
     @GetMapping("/{id}/events/") // /?page=0&size=5
     public ResponseEntity<EventShortResponse> getEventsByTrainerId(@PathVariable Long id, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         /*
@@ -63,11 +62,5 @@ public class TrainerResource {
 
 //        A tu bez sprawdzania czy istnieje taki Trener
 //        return ResponseEntity.ok(new EventShortResponse(eventService.getShortEventsByTrainerId(id)));
-    }
-
-    // TODO: 13.03.2024 czy takie api ma sens, tutaj przekazujemy rzeczy i odpalamy metode z EventService?
-    @PostMapping("/{id}/events/adding")
-    public ResponseEntity<Object> addEvent(){
-        throw new IllegalArgumentException("Nie zaimplementowano jeszcze");
     }
 }

@@ -15,6 +15,7 @@ public class EventShortDto {
     private Long id;
     private String title;
     private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private Long trainerId;
+    private String trainerName;
 //    private boolean open; // czy jeszcze sa miejsca na ten event
 }

@@ -17,6 +17,8 @@ public class EventMapper {
                 .id(event.getId())
                 .title(event.getTitle())
                 .startDate(event.getStartDate())
+                .trainerId(event.getTrainer().getId())
+                .trainerName(event.getTrainer().getName())
                 .build();
     }
     public static List<EventShortDto> toShortDtoList(List<Event> eventList) {

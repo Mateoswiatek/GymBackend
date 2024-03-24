@@ -29,6 +29,10 @@ Rekurencyjny problem:
 
 
 # Endpoints
+DONE:
+- trainers
+- 
+
 
 - **/home** 
   - TODO GET ???
