@@ -1,5 +1,6 @@
 package com.example.gym.service;
 
+import com.example.gym.dto.EventDto;
 import com.example.gym.mapper.EventMapper;
 import com.example.gym.dto.EventShortDto;
 import com.example.gym.repository.EventRepository;
@@ -9,8 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +34,13 @@ public class EventService {
     public List<EventShortDto> getShortEventsByTrainerId(Long id, int page, int size) {
         //
         return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id, PageRequest.of(page, size)));
+    }
+
+    public EventDto getEventDtoById(Long id) {
+        Optional<Event> optional = eventRepository.findByIdWithTrainer(id);
+        if(optional.isEmpty()) {
+            throw new RuntimeException("no data, Event with id=" + id);
+        }
+        return EventMapper.toDto(optional.get());
     }
 }

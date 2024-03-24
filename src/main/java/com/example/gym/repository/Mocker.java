@@ -4,6 +4,7 @@ import com.example.gym.repository.entity.Event;
 import com.example.gym.repository.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,14 +15,23 @@ public class Mocker {
     private final EventRepository eventRepository;
     private final TrainerRepository trainerRepository;
 
+    @Transactional // ??? cos chyba nie dziala tak jak powinno
+    public void mockEventsAndTrainers() {
+        mockTrainers();
+        mockEvents();
+    }
+
     public void mockEvents() {
         List<Event> events = new ArrayList<>(21);
+        List<Trainer> trainers = trainerRepository.findAll();
         for (int i = 1; i <= 21; i++) {
+            Trainer trainer = trainers.get(i % trainers.size());
             events.add(Event.builder()
                 .title("tytul" + i)
                 .description("opis")
                 .startDate(LocalDateTime.now())
                 .endDate(LocalDateTime.now().plusHours(3))
+                .trainer(trainer)
             .build());
         }
         events.add(Event.builder()
@@ -29,8 +39,15 @@ public class Mocker {
                 .description("opisPrzyszlosci")
                 .startDate(LocalDateTime.now().plusDays(10))
                 .endDate(LocalDateTime.now().plusDays(11))
+                .trainer(trainers.get(0))
             .build());
         eventRepository.saveAll(events);
+
+        trainerRepository.save(Trainer.builder()
+                .name("NazwaBezEventu")
+                .lastname("NazwiskoBezEventu")
+                .phoneNumber("777")
+                .build());
     }
 
     public void mockTrainers() {
@@ -45,19 +62,12 @@ public class Mocker {
                             .description("Opis " + i)
                             .igNickname("nazwaNaInsta " + i)
                             .inGym(random.nextBoolean())
-                            .events(eventRepository.findAllById(List.of(i, 21-i)))
                     .build());
         }
         trainers.add(Trainer.builder()
                         .name("NazwaX")
                         .lastname("NazwiskoX")
                         .phoneNumber("999")
-                        .events(List.of(Objects.requireNonNull(eventRepository.findById(21L).orElse(null))))
-                .build());
-        trainers.add(Trainer.builder()
-                .name("NazwaBez")
-                .lastname("NazwiskoBez")
-                .phoneNumber("777")
                 .build());
         trainerRepository.saveAll(trainers);
     }

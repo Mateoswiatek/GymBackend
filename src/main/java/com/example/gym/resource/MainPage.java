@@ -8,6 +8,7 @@ import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +22,7 @@ public class MainPage {
     private final TrainerService trainerService;
     @GetMapping("/mock")
     public ResponseEntity<String> mock() {
-        mocker.mockEvents();
-        mocker.mockTrainers();
+        mocker.mockEventsAndTrainers();
         return ResponseEntity.ok("zamokowalismy baze danych");
     }
 

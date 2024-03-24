@@ -20,3 +20,5 @@ todo dodać userów
 todo dodać zmienianie profili trenerów / userów, doczytać jak takie coś robić.
 
 todo doczytać jak się robi logowania.
+
+todo Zrobić swoje wyjątki, jak na wykładzie "były".

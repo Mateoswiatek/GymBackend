@@ -1,10 +1,8 @@
 package com.example.gym.repository.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +20,7 @@ public class Event {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     @ManyToOne
+    @JoinColumn(name = "TRAINER_ID", nullable = false)
     private Trainer trainer;
     // TODO: 24.03.2024 Dodać informację dla userow ktorzy się zapisują.
     // TODO: 24.03.2024 Dodać lokalizację / nazwę lokalizacji gdzie event się odbywa

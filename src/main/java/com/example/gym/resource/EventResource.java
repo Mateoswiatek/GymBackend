@@ -20,7 +20,7 @@ public class EventResource {
     private final EventService eventService;
 
     // TODO: 12.03.2024 zmodyfikowanie stronnicowania
-    @GetMapping("/") // /?page=0&size=5
+    @GetMapping("/") // /?page=1&size=5
     public List<EventShortDto> getAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) { // ResponseEntity<EventShortResponse>
         int pageNumber = page > 0 ? page : 1;
         int sizeValue = size > 0 ? size : 10;
@@ -29,7 +29,7 @@ public class EventResource {
     }
 
     @GetMapping("/{id}")
-    public EventDto getEvent(@RequestParam int id) { // ResponseEntity<EventResponse>
-        throw new IllegalArgumentException("Nie zaimplementowano jeszcze");
+    public EventDto getEvent(@PathVariable Long id) { // ResponseEntity<EventResponse>
+        return eventService.getEventDtoById(id);
     }
 }
