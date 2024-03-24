@@ -2,6 +2,7 @@ package com.example.gym.repository;
 
 import com.example.gym.repository.entity.Event;
 
+import com.example.gym.repository.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -31,5 +32,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     // do pobierania razem z trenerem.
     @Query("select e.id from Event e")
     List<Long> findAllEventIds(Pageable pageable);
+
+    @Query("select e.participants from Event e where e.id = :eventId")
+    List<User> findParticipantsByEventId(Long eventId);
 
 }

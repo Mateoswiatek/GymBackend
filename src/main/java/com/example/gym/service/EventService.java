@@ -1,8 +1,10 @@
 package com.example.gym.service;
 
 import com.example.gym.dto.EventDto;
+import com.example.gym.dto.UserShortDto;
 import com.example.gym.mapper.EventMapper;
 import com.example.gym.dto.EventShortDto;
+import com.example.gym.mapper.UserMapper;
 import com.example.gym.repository.EventRepository;
 import com.example.gym.repository.entity.Event;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +44,9 @@ public class EventService {
             throw new RuntimeException("no data, Event with id=" + id);
         }
         return EventMapper.toDto(optional.get());
+    }
+
+    public List<UserShortDto> getEventParticipants(Long id) {
+        return UserMapper.toShortDtoList(eventRepository.findParticipantsByEventId(id));
     }
 }

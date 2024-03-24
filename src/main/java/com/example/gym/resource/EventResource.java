@@ -2,6 +2,7 @@ package com.example.gym.resource;
 
 import com.example.gym.dto.EventDto;
 import com.example.gym.dto.EventShortDto;
+import com.example.gym.dto.UserShortDto;
 import com.example.gym.service.EventService;
 import jakarta.persistence.PostPersist;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +33,31 @@ public class EventResource {
     public EventDto getEvent(@PathVariable Long id) { // ResponseEntity<EventResponse>
         return eventService.getEventDtoById(id);
     }
+
+    @GetMapping("/{id}/participants")
+    public List<UserShortDto> getEventParticipants(@PathVariable Long id) {
+        return eventService.getEventParticipants(id);
+    }
+
+
+
+
+
+
 }
+
+
+/* Coś w tym stylu ? jakby wbudowane kontrolery w inny kontroler?
+@RequestMapping("/{id}")
+    public class EventById{
+        private Long id;
+
+        public EventById(@PathVariable Long id) {
+            this.id = id;
+        }
+        @GetMapping("")
+        public EventDto getEvent(Long id) { // ResponseEntity<EventResponse>
+            return eventService.getEventDtoById(id);
+        }
+    }
+ */
