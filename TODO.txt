@@ -8,12 +8,15 @@ todo pozamieniać Entity na obiekty DTO
 todo doac obudowanie ResponseEntity, jak wyklad byl
 todo Ilosc osob na silowni, zrobic w userze, po prostu zwracamy count(*) where zalogowany = true czy jakos tak.
 
-todo dodac wszedzie stronicowanie przy wiekszych zapytaniach
-
-todo wgl dodac userow, dodac tez ich staty
-
-todo czy nie lepiej byłoby zamiast list, zwracać page? skoro i tak leci jako strona? w tedy nie trzeba mapować bez sensu co chwile z listy na page i na odwrót
-
+todo pozamieniać obiekty Dto z klas na Recodry? bo chyba one są szybsze i sa niemutowalne, w tedy można by dać odrazu w nich metody do zwracania odpowiednich typów? nie potrzeba mapera?
 post = trainer
 comment = events
 
+
+todo zrobić post na eventach.
+
+todo dodać userów
+
+todo dodać zmienianie profili trenerów / userów, doczytać jak takie coś robić.
+
+todo doczytać jak się robi logowania.

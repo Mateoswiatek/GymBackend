@@ -13,7 +13,7 @@ public class TrainerMapper {
                 .lastname(trainer.getLastname())
                 .phoneNumber(trainer.getPhoneNumber())
                 .inGym(trainer.isInGym())
-                .build();
+            .build();
     }
     public static TrainerDto toDto(Trainer trainer) {
         return TrainerDto.builder()
@@ -21,7 +21,9 @@ public class TrainerMapper {
                 .name(trainer.getName())
                 .lastname(trainer.getLastname())
                 .phoneNumber(trainer.getPhoneNumber())
+                .description(trainer.getDescription())
+                .igNickname(trainer.getIgNickname())
                 .inGym(trainer.isInGym())
-                .build();
+            .build();
     }
 }

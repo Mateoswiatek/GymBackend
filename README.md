@@ -28,4 +28,99 @@ Rekurencyjny problem:
 
 
 
+# Endpoints
+
+- **/home** 
+  - TODO GET ???
+    - Request 
+      - Empty
+    - Response
+      - usersCount (Long)
+      - trainerCount (Long)
+  - TODO **/find** - wyszukiwarka
+    - GET
+      - Request
+        - dyskryminator (Long) - czego szukamy (Event, Trainer, User)
+        - .......
+        - konkretne parametry ??? głównie po nazwie
+        - page (Long)
+        - size (Long)
+      - Response
+        - result (List< ??? >) w zalezności od wyszukiwania to się zwróci?
+    
+    - TODO **/events** - eventy
+      - Specyficzne dla eventow?
+    - TODO **/trainers** - trenerzy
+      - specyficzne dla trenerow?
+
+
+- **/events** - lista wszystkich eventów
+  - GET
+    - Request
+      - page (Long)
+      - size (Long)
+    - Response
+      - events (List< EventShortDto>)
+  - POST
+  TODO: Zrobić Posta
+    - Request
+      - event (EventDto)
+      - Trainer
+
+  - **/{id}** - konkretny event
+    - GET
+      - Request
+        - eventId (Long)
+      - Response
+        - eventDto (EventDto) 
+    - **/enroll** - zapisanie się na event.
+      - POST
+        - Request
+          - courseId (Long) - path
+          - userId (Long)
+        - Response
+          - success (boolean)
+          - info (String) - informacja od konkretnego eventu
+    - **/unenroll** - wycofanie się z eventu
+      - POST
+        - Request
+          - courseId (Long) - path
+          - userId (Long)
+        - Response
+          - success (boolean)
+    - **/participants** - uczestnicy
+      - GET
+        - Request
+          - courseId (Long) - path
+          - page (Long)
+          - size (Long)
+        - Resonse
+          - participants (List< UserShortDto>)
+
+- **/trainers** - lista trenerów 
+  - GET
+    - Request
+      - page (Long)
+      - size (Long)
+    - Response
+      - trainers (List< TrainerShortDto>)
+  - **/{id}** - konkretny trener
+    - GET
+      - Request
+        - trainerId (Long) - path
+      - Response
+        - trainer (TrainerDto)
+    - **/events** - lista eventów które prowadzi
+      - GET
+        - Request
+          - trainerId (Long) - path
+          - page (Long)
+          - size (Long)
+        - Response
+          - events (List< EventShortDto>)
+
+- **/dashboard/{id}**
+
+Tu będzie profil usera konkretnego, razem z możliwościa modyfikacji - tylko ten konkretny user,
+po jakimś tokenie?
 

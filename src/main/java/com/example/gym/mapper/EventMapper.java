@@ -16,7 +16,7 @@ public class EventMapper {
         return EventShortDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
-                .date(event.getDate())
+                .startDate(event.getStartDate())
                 .build();
     }
     public static List<EventShortDto> toShortDtoList(List<Event> eventList) {
@@ -27,7 +27,7 @@ public class EventMapper {
                 .id(event.getId())
                 .title(event.getTitle())
                 .description(event.getDescription())
-                .date(event.getDate())
+                .startDate(event.getStartDate())
                 .build();
     }
     public static List<EventDto> toDtoList(List<Event> eventList) {

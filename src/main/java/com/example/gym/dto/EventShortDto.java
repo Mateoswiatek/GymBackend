@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class EventShortDto {
     private Long id;
     private String title;
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 //    private boolean open; // czy jeszcze sa miejsca na ten event
 }

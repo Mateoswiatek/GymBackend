@@ -1,8 +1,10 @@
 package com.example.gym.service;
 
+import com.example.gym.dto.EventDto;
 import com.example.gym.mapper.EventMapper;
 import com.example.gym.dto.EventShortDto;
 import com.example.gym.repository.EventRepository;
+import com.example.gym.repository.entity.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,8 @@ public class EventService {
         return EventMapper.toShortDtoList(eventRepository.findAllByTitle(title));
     }
 
-    public List<EventShortDto> getShortEventsByTrainerId(Long id) {
-        return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id));
+    public List<EventShortDto> getShortEventsByTrainerId(Long id, int page, int size) {
+        //
+        return EventMapper.toShortDtoList(eventRepository.findAllByTrainerId(id, PageRequest.of(page, size)).getContent());
     }
 }

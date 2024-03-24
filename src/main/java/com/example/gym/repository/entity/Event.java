@@ -19,9 +19,12 @@ public class Event {
     private long id;
     private String title;
     private String description;
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     @ManyToOne
     private Trainer trainer;
+    // TODO: 24.03.2024 Dodać informację dla userow ktorzy się zapisują.
+    // TODO: 24.03.2024 Dodać lokalizację / nazwę lokalizacji gdzie event się odbywa
 }
 
 /*

@@ -18,16 +18,18 @@ public class Mocker {
         List<Event> events = new ArrayList<>(21);
         for (int i = 1; i <= 21; i++) {
             events.add(Event.builder()
-                        .title("tytul" + i)
-                        .description("opis")
-                        .date(LocalDateTime.now())
-                    .build());
+                .title("tytul" + i)
+                .description("opis")
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now().plusHours(3))
+            .build());
         }
         events.add(Event.builder()
                 .title("PrzyszlyEvent")
                 .description("opisPrzyszlosci")
-                .date(LocalDateTime.now().plusDays(10))
-                .build());
+                .startDate(LocalDateTime.now().plusDays(10))
+                .endDate(LocalDateTime.now().plusDays(11))
+            .build());
         eventRepository.saveAll(events);
     }
 
@@ -40,6 +42,8 @@ public class Mocker {
                             .name("Nazwa" + i)
                             .lastname("Nazwisko" + i)
                             .phoneNumber(String.valueOf(i))
+                            .description("Opis " + i)
+                            .igNickname("nazwaNaInsta " + i)
                             .inGym(random.nextBoolean())
                             .events(eventRepository.findAllById(List.of(i, 21-i)))
                     .build());

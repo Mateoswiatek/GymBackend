@@ -15,6 +15,7 @@ public class TrainerDto {
     private String name;
     private String lastname;
     private String phoneNumber;
-    private String instagramNick;
+    private String description;
+    private String igNickname;
     private boolean inGym;
 }

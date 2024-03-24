@@ -10,8 +10,13 @@ import java.util.List;
 
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
-    @Query("select t from Trainer t") // co dociagamy
-    List<Trainer> findAllTrainers(Pageable page);
+//    @Query("select t from Trainer t left join fetch t.events") // określamy co dociągamy, ale problem jest, gdy mamy Pageable,
+        // bo gdy jest join, to nie wiadomo ile będzie rekordów, dlatego tego nie możemy użyć. rozwiązaniem jest
+        // stworzenie metody która pobiera trenerów, a potem wszystkie eventy
+//    List<Trainer> findAllTrainers();
+
+    @Query("select t from Trainer t")
+    List<Trainer> findAllTrainers(Pageable page); //
 
     Long countAllByInGymIsTrue();
 }

@@ -1,22 +1,20 @@
 package com.example.gym.resource;
 
 import com.example.gym.dto.EventShortDto;
-import com.example.gym.dto.StatsInGymResponse;
+import com.example.gym.dto.HomeResponse;
 import com.example.gym.repository.Mocker;
 import com.example.gym.service.EventService;
 import com.example.gym.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/home")
 public class MainPage {
     private final Mocker mocker;
     private final EventService eventService;
@@ -29,11 +27,11 @@ public class MainPage {
     }
 
     // TODO: 13.03.2024 Dorobic usera
-    @GetMapping("/ingym")
-    public ResponseEntity<StatsInGymResponse> inGym() {
+    @GetMapping("")
+    public ResponseEntity<HomeResponse> inGym() {
         Long userCount = 0L;
         Long trainerCount = trainerService.getCountTrainerInGym();
-        return ResponseEntity.ok(new StatsInGymResponse(userCount, trainerCount));
+        return ResponseEntity.ok(new HomeResponse(userCount, trainerCount));
     }
 
     // TODO: 13.03.2024 dorobic filtrowanie jakies ciekawsze ogarnac z filtrowaniem?

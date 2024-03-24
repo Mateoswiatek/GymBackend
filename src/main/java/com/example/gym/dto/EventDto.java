@@ -17,6 +17,7 @@ public class EventDto {
     private Long id;
     private String title;
     private String description;
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     // liczba miejsc, wolnych i zajetych, nazwa organizatora, id organizatora - aby mozna bylo przejsc do jego strony
 }
