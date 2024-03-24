@@ -18,4 +18,16 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findAllByTitle(String title);
     List<Event> findAllByTrainerId(Long id, Pageable pageable);
+
+    // https://vladmihalcea.com/join-fetch-pagination-spring/
+    // Takie obejście, bo w tym eventIds jest juz pageable.
+    // bo N+1 naturalnie rozwiazujemy poprzez left join fetch, ale to sie gryzie z pageable. takie rozwiazanie
+    // ale musimy pobierac bezposrednio liste id.
+    @Query("select e from Event e left join fetch e.trainer where e.id in :eventIds")
+    List<Event> findAllByIdWithTrainer(List<Long> eventIds);
+
+    // do pobierania razem z trenerem.
+    @Query("select e.id from Event e")
+    List<Long> findAllEventIds(Pageable pageable);
+
 }

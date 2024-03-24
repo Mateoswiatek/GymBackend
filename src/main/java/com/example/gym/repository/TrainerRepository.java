@@ -1,5 +1,6 @@
 package com.example.gym.repository;
 
+import com.example.gym.repository.entity.Event;
 import com.example.gym.repository.entity.Trainer;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,5 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     List<Trainer> findAllTrainers(Pageable page); //
 
     Long countAllByInGymIsTrue();
+
 }
