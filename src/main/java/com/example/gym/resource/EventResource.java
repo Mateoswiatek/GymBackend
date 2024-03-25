@@ -34,7 +34,14 @@ public class EventResource {
         return eventService.getEventDtoById(id);
     }
 
-    @GetMapping("/{id}/participants/") ///?page=1&size=5
+    @PostMapping(path = "/{id}/participants/{userId}") // consumes = MediaType.APPLICATION_JSON_VALUE, @RequestBody Long userId)
+    public ResponseEntity<Object> addUserToEvent(@PathVariable Long id, @PathVariable Long userId) {
+        eventService.addUserToEvent(id, userId);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/participants/").build().toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/{id}/participants/") //?page=1&size=5
     public List<UserShortDto> getEventParticipants(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @PathVariable Long id) {
         int pageNumber = page > 0 ? page : 1;
         int sizeValue = size > 0 ? size : 10;

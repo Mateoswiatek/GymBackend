@@ -8,6 +8,7 @@ import com.example.gym.mapper.UserMapper;
 import com.example.gym.repository.EventRepository;
 import com.example.gym.repository.UserRepository;
 import com.example.gym.repository.entity.Event;
+import com.example.gym.repository.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,29 @@ public class EventService {
 
     public List<UserShortDto> getEventParticipants(Long id, int page, int size) {
         return UserMapper.toShortDtoList(eventRepository.findParticipantsByEventId(id, PageRequest.of(page, size)));
+    }
+
+    public void addUserToEvent(Long eventId, Long userId) {
+
+        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+        if(optionalEvent.isEmpty()) {
+            throw new RuntimeException("no data, Event with id=" + eventId);
+        }
+        Event event = optionalEvent.get();
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isEmpty()) {
+            throw new RuntimeException("no data, User with id=" + userId);
+        }
+        User user = optionalUser.get();
+
+        if(event.getParticipants().contains(user)) {
+            throw new RuntimeException("you are already registered. UserId=" + userId + ", EventId=" + eventId);
+        }
+
+        event.getParticipants().add(user);
+        user.getEvents().add(event);
+        eventRepository.save(event);
+        userRepository.save(user);
     }
 }

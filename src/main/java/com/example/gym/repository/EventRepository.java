@@ -31,7 +31,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByIdWithTrainer(List<Long> eventIds);
 
     // do pobierania razem z trenerem.
-    @Query("select e.id from Event e")
+    @Query("select e.id from Event e order by e.startDate")
     List<Long> findAllEventIds(Pageable pageable);
 
     @Query("select e.participants from Event e where e.id = :eventId")
