@@ -7,12 +7,21 @@ Przekazywanie parametrów w adresie
 N+1 problem + rozwiązanie
 Java Data, własne zapytania JPQL, następnie generowane przez konwencję nazewniczą
 Stronicowanie
-applying in memory problem + rozwiązanie
+applying in memory problem + rozwiązanie - nie zwracanie fetchowanych danych
 
 Problem z encjami podczas wyrzukiwania Eventów po Id Trenera -> należało dodać adnotacje JoinColumn - dodaje kolumnę TRAINER_ID do eventow. ale blad byl jednak w maperze, bo nie dodawalem id.
 Bez JoinColumn tworzona jest nowa tabela. Rowniez jest problem przy zwracaniu eventow. w naszym przypadku każdy event (większość) powinna mieć prowadzących, więc wydajniej jest dodać kolumnę. 
 
-Użycie count zamiast find przy tworzeniu statystyki "inGym"
+fetch z Pageable - rozwiązanie - podwójne zapytanie id z pageable, potem dociaganie
+
+zwracanie fetchowanych parametrów z encji.
+
+relacja wiele do wielu z określeniem własnej tabeli
+
+
+
+
+
 
 
 ![image](https://github.com/Mateoswiatek/GymBackend/assets/115046087/8f120c51-d2c5-4a91-89f2-60e108b5dcb4)
@@ -29,9 +38,12 @@ Rekurencyjny problem:
 
 
 # Endpoints
-DONE:
-- trainers
-- 
+TODO
+/events/{id}/enroll
+/events/{id}/unenroll
+/home...
+/dashboard...
+/trainer - jakies modyfikacje trenera? update.
 
 
 - **/home** 
@@ -76,22 +88,20 @@ DONE:
       - Request
         - eventId (Long)
       - Response
-        - eventDto (EventDto) 
-    - **/enroll** - zapisanie się na event.
-      - POST
-        - Request
-          - courseId (Long) - path
-          - userId (Long)
-        - Response
-          - success (boolean)
-          - info (String) - informacja od konkretnego eventu
-    - **/unenroll** - wycofanie się z eventu
-      - POST
-        - Request
-          - courseId (Long) - path
-          - userId (Long)
-        - Response
-          - success (boolean)
+        - eventDto (EventDto)
+    - POST - zapisanie się na event.
+      - Request
+        - courseId (Long) - path
+        - userId (Long)
+      - Response
+        - success (boolean)
+        - info (String) - informacja od konkretnego eventu
+    - DELETE - wycofanie się z eventu
+      - Request
+        - courseId (Long) - path
+        - userId (Long)
+      - Response
+        - success (boolean)
     - **/participants** - uczestnicy
       - GET
         - Request
@@ -101,7 +111,6 @@ DONE:
         - Resonse
           - participants (List< UserShortDto>)
 
-DONE
 - **/trainers** - lista trenerów 
   - GET
     - Request
@@ -129,3 +138,24 @@ DONE
 Tu będzie profil usera konkretnego, razem z możliwościa modyfikacji - tylko ten konkretny user,
 po jakimś tokenie?
 
+/events
+![img.png](jpgs/img.png)
+
+/events/{id}
+![img_1.png](jpgs/img_1.png)
+
+/events/{id}/participants/
+![img_2.png](jpgs/img_2.png)
+
+/events/{id} POST - zapisanie się na event
+![img.png](jpgs/img_6.png)
+![img.png](jpgs/img_7.png)
+
+/trainers
+![img_3.png](jpgs/img_3.png)
+
+/trainers/{id}
+![img_4.png](jpgs/img_4.png)
+
+/trainers/{id}/events/
+![img_5.png](jpgs/img_5.png)
