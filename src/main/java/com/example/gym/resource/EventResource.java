@@ -2,6 +2,7 @@ package com.example.gym.resource;
 
 import com.example.gym.dto.EventDto;
 import com.example.gym.dto.EventShortDto;
+import com.example.gym.dto.RequestAddUserToEvent;
 import com.example.gym.dto.UserShortDto;
 import com.example.gym.service.EventService;
 import jakarta.persistence.PostPersist;
@@ -34,9 +35,9 @@ public class EventResource {
         return eventService.getEventDtoById(id);
     }
 
-    @PostMapping(path = "/{id}/participants/{userId}") // consumes = MediaType.APPLICATION_JSON_VALUE, @RequestBody Long userId)
-    public ResponseEntity<Object> addUserToEvent(@PathVariable Long id, @PathVariable Long userId) {
-        eventService.addUserToEvent(id, userId);
+    @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> addUserToEvent(@PathVariable Long id, @RequestBody RequestAddUserToEvent addUserToEvent) {
+        eventService.addUserToEvent(id, addUserToEvent.getUserId());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/participants/").build().toUri();
         return ResponseEntity.created(location).build();
     }
