@@ -4,6 +4,7 @@ import com.example.gym.repository.TrainerRepository;
 import com.example.gym.repository.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

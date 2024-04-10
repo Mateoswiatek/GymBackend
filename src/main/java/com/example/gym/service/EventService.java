@@ -11,6 +11,7 @@ import com.example.gym.repository.entity.Event;
 import com.example.gym.repository.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +25,15 @@ public class EventService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public List<EventShortDto> getShortEvents(int page, int size) {
+    public List<EventShortDto> getShortEvents(int page, int size, Sort.Direction direction) {
         // To się wywala nie wiadomo czemu, czemu nie można bezposrednio podawać listy Idików?
 //        return EventMapper.toShortDtoList(eventRepository.findAllByIdWithTrainer(eventRepository.findAll(PageRequest.of(page, size)).stream().map(Event::getId).toList()));
 
 //        return EventMapper.toShortDtoList(eventRepository.findAllByIdWithTrainer(Arrays.asList(1L, 2L, 3L, 4L, 5L)));
-        return EventMapper.toShortDtoList(eventRepository.findAllByIdWithTrainer(eventRepository.findAllEventIds(PageRequest.of(page, size))));
+        return EventMapper.toShortDtoList(eventRepository
+                .findAllByIdWithTrainer(eventRepository
+                        .findAllEventIds(PageRequest.of(page, size)),
+                        Sort.by(direction, "title")));
     }
 
     public List<EventShortDto> getShortEventsByTitle(String title){

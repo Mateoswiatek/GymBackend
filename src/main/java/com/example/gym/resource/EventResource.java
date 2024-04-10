@@ -7,6 +7,7 @@ import com.example.gym.dto.UserShortDto;
 import com.example.gym.service.EventService;
 import jakarta.persistence.PostPersist;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,13 @@ public class EventResource {
 
     // TODO: 12.03.2024 zmodyfikowanie stronnicowania
     @GetMapping("/") // /?page=1&size=5
-    public List<EventShortDto> getAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) { // ResponseEntity<EventShortResponse>
+    public List<EventShortDto> getAll(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Sort.Direction direction) { // ResponseEntity<EventShortResponse>
         int pageNumber = page > 0 ? page : 1;
         int sizeValue = size > 0 ? size : 10;
-        return eventService.getShortEvents(pageNumber-1, sizeValue);
+        return eventService.getShortEvents(pageNumber-1, sizeValue, direction);
 //        return ResponseEntity.ok(new EventShortResponse(eventShortDtoList));
     }
 

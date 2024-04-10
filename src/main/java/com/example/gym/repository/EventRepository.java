@@ -3,6 +3,7 @@ package com.example.gym.repository;
 import com.example.gym.repository.entity.Event;
 
 import com.example.gym.repository.entity.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,7 +29,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     // bo N+1 naturalnie rozwiazujemy poprzez left join fetch, ale to sie gryzie z pageable. takie rozwiazanie
     // ale musimy pobierac bezposrednio liste id.
     @Query("select e from Event e left join fetch e.trainer where e.id in :eventIds")
-    List<Event> findAllByIdWithTrainer(List<Long> eventIds);
+    List<Event> findAllByIdWithTrainer(List<Long> eventIds, Sort sort);
 
     // do pobierania razem z trenerem.
     @Query("select e.id from Event e order by e.startDate")
