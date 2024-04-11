@@ -1,19 +1,24 @@
 package com.example.gym.service;
 
 import com.example.gym.dto.EventDto;
+import com.example.gym.dto.EventEditDto;
 import com.example.gym.dto.UserShortDto;
 import com.example.gym.mapper.EventMapper;
 import com.example.gym.dto.EventShortDto;
 import com.example.gym.mapper.UserMapper;
 import com.example.gym.repository.EventRepository;
+import com.example.gym.repository.TrainerRepository;
 import com.example.gym.repository.UserRepository;
 import com.example.gym.repository.entity.Event;
+import com.example.gym.repository.entity.Trainer;
 import com.example.gym.repository.entity.User;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +28,9 @@ import java.util.Optional;
 public class EventService {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final TrainerRepository trainerRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<EventShortDto> getShortEvents(int page, int size, Sort.Direction direction) {
         // To się wywala nie wiadomo czemu, czemu nie można bezposrednio podawać listy Idików?
 //        return EventMapper.toShortDtoList(eventRepository.findAllByIdWithTrainer(eventRepository.findAll(PageRequest.of(page, size)).stream().map(Event::getId).toList()));
@@ -79,5 +85,36 @@ public class EventService {
         user.getEvents().add(event);
         eventRepository.save(event);
         userRepository.save(user);
+    }
+
+    public long addEvent(EventDto eventDto) {
+//        EventMapper.toEventNoId(eventDto)
+        Trainer trainer = trainerRepository.findById(eventDto.getTrainerId()).get();
+        Event event = Event.builder()
+                .title(eventDto.getTitle())
+                .description(eventDto.getDescription())
+                .startDate(eventDto.getStartDate())
+                .endDate(eventDto.getEndDate())
+                .trainer(trainer).build();
+        return eventRepository.save(event).getId();
+    }
+
+    @Transactional
+    public EventDto editEvent(EventEditDto eventEditDto, long id) {
+        Event eventEdited = eventRepository.findById(id).orElseThrow();
+        eventEdited.setTitle(eventEditDto.getTitle());
+        eventEdited.setDescription(eventEditDto.getDescription());
+        eventEdited.setStartDate(eventEditDto.getStartDate());
+        eventEdited.setEndDate(eventEditDto.getEndDate());
+
+        return EventMapper.toDto(eventRepository.save(eventEdited));
+//        To jest niepotrzebne, bo hibernate
+//        ma mechanizm DirtyChecking, zmienione encje automatycnzie updatuje
+//        Więc mogłoby byc tak: ale aby wiedziec, że tu ten save jest to zostawiam
+        //return EventMapper.toDto(eventEdited);
+    }
+
+    public void deleteEvent(Long eventId) {
+        eventRepository.deleteById(eventId);
     }
 }

@@ -22,11 +22,11 @@ public class Event {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     @ManyToOne
-    @JoinColumn(name = "TRAINER_ID", nullable = false)
+    @JoinColumn(name = "TRAINER_ID", nullable = true) // aby dało radę tworzyć eventy bez trenerów, i przy usuwaniu trenerów, aby zostały eventy jego.
     private Trainer trainer;
 
     //https://www.baeldung.com/jpa-many-to-many
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "user_event",
             joinColumns = @JoinColumn(name = "event_id"),

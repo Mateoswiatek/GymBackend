@@ -18,7 +18,9 @@ zwracanie fetchowanych parametrów z encji.
 
 relacja wiele do wielu z określeniem własnej tabeli
 
+modyfikacja, usuwanie - pamiętać o cascade,
 
+problem przy modyfikowaniu (uczestnikow eventu), najpiewr usuwa wszystko a potem dodaje?
 
 
 
@@ -35,6 +37,8 @@ relacja wiele do wielu z określeniem własnej tabeli
 Rekurencyjny problem:
 ![image](https://github.com/Mateoswiatek/GymBackend/assets/115046087/c875d0df-5099-4dbc-80ea-c9ec1348cede)
 
+Antywzorzec modyfikacji - bo są listy a nie sety?
+![img.png](jpgs/img_13.png)
 
 
 # Endpoints
@@ -81,7 +85,7 @@ TODO
   TODO: Zrobić Posta
     - Request
       - event (EventDto)
-      - Trainer
+      - Trainer (z tokena?)
 
   - **/{id}** - konkretny event
     - GET
@@ -89,13 +93,6 @@ TODO
         - eventId (Long)
       - Response
         - eventDto (EventDto)
-    - POST - zapisanie się na event.
-      - Request
-        - courseId (Long) - path
-        - userId (Long)
-      - Response
-        - success (boolean)
-        - info (String) - informacja od konkretnego eventu
     - DELETE - wycofanie się z eventu
       - Request
         - courseId (Long) - path
@@ -110,6 +107,13 @@ TODO
           - size (Long)
         - Resonse
           - participants (List< UserShortDto>)
+      - PUT - zapisanie się na event.
+        - Request
+          - courseId (Long) - path
+          - userId (Long)
+        - Response
+          - success (boolean)
+          - info (String) - informacja od konkretnego eventu
 
 - **/trainers** - lista trenerów 
   - GET
@@ -144,12 +148,23 @@ po jakimś tokenie?
 /events/{id}
 ![img_1.png](jpgs/img_1.png)
 
-/events/{id}/participants/
+/events/{id}/participants
 ![img_2.png](jpgs/img_2.png)
 
-/events/{id} POST - zapisanie się na event
+/events/{id}/participants PUT - zapisanie się na event
 ![img.png](jpgs/img_6.png)
 ![img.png](jpgs/img_7.png)
+
+/events/{id} DELETE - usunięcie eventu
+![img.png](jpgs/img_11.png)
+
+/events/{id} PUT - modyfikacja eventu
+![img.png](jpgs/img_12.png)
+
+/events POST - dodanie eventu
+![img_1.png](jpgs/img_9.png)
+![img.png](jpgs/img_8.png)
+![img_2.png](jpgs/img_10.png)
 
 /trainers
 ![img_3.png](jpgs/img_3.png)
